@@ -1,7 +1,5 @@
 package com.voider.socialapi.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 import org.hibernate.annotations.Type;
@@ -14,7 +12,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id_user;
+    private Long id_user;
 
     @Column
     private String user_name;
@@ -37,16 +35,9 @@ public class User {
     private boolean banned;
 
     @Column
-    private String password;
-
-    @Column
     private String phone_number;
 
-    public String getPassword() {
-        return password;
-    }
-
-    public int getId_user() {
+    public Long getId_user() {
         return id_user;
     }
 
