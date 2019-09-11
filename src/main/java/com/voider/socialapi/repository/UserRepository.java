@@ -22,4 +22,14 @@ public interface UserRepository
                 PageRequest.of(0,1)
         ).get(0);
     }
+
+    @Query("FROM User WHERE user_name = :user_name")
+    List<User> internalByUserName(String user_name, Pageable pageable);
+
+    default User findByUserName(String user_name){
+        return internalByUserName(
+                user_name,
+                PageRequest.of(0,1)
+        ).get(0);
+    }
 }
