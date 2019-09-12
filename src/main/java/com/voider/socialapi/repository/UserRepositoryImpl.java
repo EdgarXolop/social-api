@@ -26,4 +26,11 @@ public class UserRepositoryImpl {
 
         return user;
     }
+
+    public User registerUser(User user){
+        _userRepository.save(user);
+
+        System.out.println("user id "+ user.getId_user());
+        return user;
+    }
 }

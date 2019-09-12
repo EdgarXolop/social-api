@@ -1,10 +1,14 @@
 package com.voider.socialapi.model;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Model to get the user credentials received
  */
 public class UserCredentials {
+    @NotNull
     private String email;
+    @NotNull
     private String password;
 
     public String getEmail() {
