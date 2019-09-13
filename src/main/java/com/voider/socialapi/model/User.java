@@ -2,27 +2,29 @@ package com.voider.socialapi.model;
 
 import java.util.Date;
 
-import org.hibernate.annotations.GenericGenerator;
+import com.voider.socialapi.util.ValidationMessages;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(insertable = false, updatable = false)
     private Long id_user;
 
-    @NotNull
+    @NotBlank(message = ValidationMessages.EMPTY_USERNAME)
     @Column
     private String user_name;
 
-    @NotNull
+    @Email(message = ValidationMessages.WRONG_EMAIL)
+    @NotBlank(message = ValidationMessages.EMPTY_EMAIL)
     @Column(unique = true)
     private String email;
 
@@ -44,9 +46,15 @@ public class User {
     @Column
     private String phone_number;
 
-    @NotNull
+    @NotBlank(message = ValidationMessages.EMPTY_PASSWORD)
+    @Size(min = 4)
     @Column(updatable = false)
     private String password;
+
+    @NotBlank(message = ValidationMessages.EMPTY_CONFIRM_PASSWORD)
+    @Size(min = 4)
+    @Transient
+    private String password_confirm;
 
     public Long getId_user() {
         return id_user;
@@ -119,4 +127,8 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getPassword_confirm() { return password_confirm; }
+
+    public void setPassword_confirm(String password_confirm) { this.password_confirm = password_confirm; }
 }

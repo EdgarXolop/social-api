@@ -10,26 +10,16 @@ import java.util.TimeZone;
 public class UserDTO {
     static final SimpleDateFormat dateFormat
             = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-    Long id_user;
     String user_name;
     String email;
     String first_name;
     String last_name;
     @JsonFormat(pattern="yyyy-MM-dd")
     Date date_of_birth;
-    boolean banned;
     String phone_number;
 
     public static SimpleDateFormat getDateFormat() {
         return dateFormat;
-    }
-
-    public Long getId_user() {
-        return id_user;
-    }
-
-    public void setId_user(Long id_user) {
-        this.id_user = id_user;
     }
 
     public String getUser_name() {
@@ -70,14 +60,6 @@ public class UserDTO {
 
     public void setDate_of_birth(Date date_of_birth) {
         this.date_of_birth = date_of_birth;
-    }
-
-    public boolean isBanned() {
-        return banned;
-    }
-
-    public void setBanned(boolean banned) {
-        this.banned = banned;
     }
 
     public String getPhone_number() {

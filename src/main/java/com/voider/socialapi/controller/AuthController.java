@@ -30,9 +30,9 @@ public class AuthController {
     @PostMapping("/register")
     ResponseEntity<UserDTO> login(@Valid @RequestBody User user){
 
-        ModelMapper modelMapper = new ModelMapper();
-
         user = _userService.registerUser(user);
+
+        ModelMapper modelMapper = new ModelMapper();
 
         UserDTO userDTO = modelMapper.map(user, UserDTO.class);
 
