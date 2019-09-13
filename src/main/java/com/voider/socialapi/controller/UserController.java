@@ -1,7 +1,7 @@
 package com.voider.socialapi.controller;
 
 import com.voider.socialapi.model.User;
-import com.voider.socialapi.model.UserDTO;
+import com.voider.socialapi.dto.UserDTO;
 import com.voider.socialapi.repository.UserRepositoryImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

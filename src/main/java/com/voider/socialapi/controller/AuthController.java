@@ -2,7 +2,7 @@ package com.voider.socialapi.controller;
 
 import com.voider.socialapi.model.User;
 import com.voider.socialapi.model.UserCredentials;
-import com.voider.socialapi.model.UserDTO;
+import com.voider.socialapi.dto.UserDTO;
 import com.voider.socialapi.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.sql.SQLIntegrityConstraintViolationException;
 
 @RestController
 @RequestMapping("/auth")

@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface UserRepository
-        extends JpaRepository<User, Integer> {
+        extends JpaRepository<User, Long> {
 
     @Query("FROM User WHERE email = :email")
     List<User> internalByEmail(String email, Pageable pageable);

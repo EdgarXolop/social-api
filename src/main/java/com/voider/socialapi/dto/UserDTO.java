@@ -1,4 +1,4 @@
-package com.voider.socialapi.model;
+package com.voider.socialapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -8,8 +8,6 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class UserDTO {
-    static final SimpleDateFormat dateFormat
-            = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     String user_name;
     String email;
     String first_name;
@@ -17,10 +15,6 @@ public class UserDTO {
     @JsonFormat(pattern="yyyy-MM-dd")
     Date date_of_birth;
     String phone_number;
-
-    public static SimpleDateFormat getDateFormat() {
-        return dateFormat;
-    }
 
     public String getUser_name() {
         return user_name;
@@ -69,4 +63,5 @@ public class UserDTO {
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
+
 }
