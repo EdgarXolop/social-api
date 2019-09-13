@@ -50,8 +50,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         List<String> errors = new ArrayList<>();
 
-        if(errors.contains(ErrorUtil.INDEX_USER_EMAIL)) errors.add(ErrorUtil.DUPLICATED_EMAIL);
-        if(errors.contains(ErrorUtil.INDEX_USER_USERNAME)) errors.add(ErrorUtil.DUPLICATED_USERNAME);
+        if(error.contains(ErrorUtil.INDEX_USER_EMAIL)) errors.add(ErrorUtil.DUPLICATED_EMAIL);
+        if(error.contains(ErrorUtil.INDEX_USER_USERNAME)) errors.add(ErrorUtil.DUPLICATED_USERNAME);
 
         if(error.length() == 0) errors.add(error);
 
