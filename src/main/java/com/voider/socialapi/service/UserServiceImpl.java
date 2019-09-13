@@ -20,10 +20,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User registerUser(User user) {
 
-        System.out.println(user.getPassword().equals(user.getPassword_confirm()));
-        System.out.println(user.getPassword());
-        System.out.println(user.getPassword_confirm());
-
         if(!user.getPassword().equals(user.getPassword_confirm())) throw  new PasswordMismatchException("The passwords mismatch.");
 
         _userRepository.registerUser(user);

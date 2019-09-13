@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 @RestController
 @RequestMapping("/auth")
@@ -28,7 +29,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    ResponseEntity<UserDTO> login(@Valid @RequestBody User user){
+    ResponseEntity<UserDTO> login(@Valid @RequestBody User user) {
 
         user = _userService.registerUser(user);
 

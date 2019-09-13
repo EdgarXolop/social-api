@@ -3,10 +3,14 @@ package com.voider.socialapi.repository;
 import com.voider.socialapi.http.exception.ResourceNotFoundException;
 import com.voider.socialapi.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserRepositoryImpl {
+
+    @Autowired
+    public PasswordEncoder encoder;
 
     @Autowired
     UserRepository _userRepository;
@@ -28,6 +32,9 @@ public class UserRepositoryImpl {
     }
 
     public User registerUser(User user){
+
+        user.setPassword(encoder.encode(user.getPassword()));
+
         _userRepository.save(user);
 
         System.out.println("user id "+ user.getId_user());

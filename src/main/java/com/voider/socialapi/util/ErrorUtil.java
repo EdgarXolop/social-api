@@ -1,6 +1,10 @@
 package com.voider.socialapi.util;
 
-public class ValidationMessages {
+public class ErrorUtil {
+
+    //DB INDEXES
+    public final static String INDEX_USER_EMAIL = "user_index_email";
+    public final static String INDEX_USER_USERNAME = "user_index_user_name";
 
     //USER VALIDATION MESSAGES
     public final static String EMPTY_USERNAME = "Please provide provide the user_name.";

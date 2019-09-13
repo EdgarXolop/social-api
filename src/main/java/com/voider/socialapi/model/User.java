@@ -2,7 +2,7 @@ package com.voider.socialapi.model;
 
 import java.util.Date;
 
-import com.voider.socialapi.util.ValidationMessages;
+import com.voider.socialapi.util.ErrorUtil;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,12 +19,12 @@ public class User {
     @Column(insertable = false, updatable = false)
     private Long id_user;
 
-    @NotBlank(message = ValidationMessages.EMPTY_USERNAME)
+    @NotBlank(message = ErrorUtil.EMPTY_USERNAME)
     @Column
     private String user_name;
 
-    @Email(message = ValidationMessages.WRONG_EMAIL)
-    @NotBlank(message = ValidationMessages.EMPTY_EMAIL)
+    @Email(message = ErrorUtil.WRONG_EMAIL)
+    @NotBlank(message = ErrorUtil.EMPTY_EMAIL)
     @Column(unique = true)
     private String email;
 
@@ -46,12 +46,12 @@ public class User {
     @Column
     private String phone_number;
 
-    @NotBlank(message = ValidationMessages.EMPTY_PASSWORD)
+    @NotBlank(message = ErrorUtil.EMPTY_PASSWORD)
     @Size(min = 4)
     @Column(updatable = false)
     private String password;
 
-    @NotBlank(message = ValidationMessages.EMPTY_CONFIRM_PASSWORD)
+    @NotBlank(message = ErrorUtil.EMPTY_CONFIRM_PASSWORD)
     @Size(min = 4)
     @Transient
     private String password_confirm;

@@ -1,6 +1,6 @@
 package com.voider.socialapi.model;
 
-import com.voider.socialapi.util.ValidationMessages;
+import com.voider.socialapi.util.ErrorUtil;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -12,14 +12,10 @@ import javax.validation.constraints.NotNull;
  */
 public class UserCredentials {
 
-    @NotNull(message = ValidationMessages.EMPTY_EMAIL)
-    @NotEmpty(message = ValidationMessages.EMPTY_EMAIL)
-    @NotBlank(message = ValidationMessages.EMPTY_EMAIL)
+    @NotBlank(message = ErrorUtil.EMPTY_EMAIL)
     private String email;
 
-    @NotNull(message = ValidationMessages.EMPTY_PASSWORD)
-    @NotEmpty(message = ValidationMessages.EMPTY_PASSWORD)
-    @NotBlank(message = ValidationMessages.EMPTY_PASSWORD)
+    @NotBlank(message = ErrorUtil.EMPTY_PASSWORD)
     private String password;
 
     public String getEmail() {
