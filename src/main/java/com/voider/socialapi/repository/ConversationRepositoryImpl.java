@@ -35,6 +35,13 @@ public class ConversationRepositoryImpl {
 
     }
 
+    @Transactional
+    public void setConversationUUID(Long id, String uuid){
+
+        _conversationRepository.setConversationUUID(id,uuid);
+
+    }
+
     public Conversation getConversation(Long id_user_creator, Long id_user_invited){
 
         Optional<Conversation> conversation = _conversationRepository.getConversation(id_user_creator,id_user_invited);

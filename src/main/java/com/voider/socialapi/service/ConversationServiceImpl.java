@@ -1,6 +1,6 @@
 package com.voider.socialapi.service;
 
-import com.voider.socialapi.http.exception.ConversationmMatchException;
+import com.voider.socialapi.http.exception.ConversationMatchException;
 import com.voider.socialapi.model.Conversation;
 import com.voider.socialapi.model.User;
 import com.voider.socialapi.repository.ConversationRepositoryImpl;
@@ -8,8 +8,6 @@ import com.voider.socialapi.repository.UserRepositoryImpl;
 import com.voider.socialapi.util.ErrorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ConversationServiceImpl implements ConversationService {
@@ -28,7 +26,7 @@ public class ConversationServiceImpl implements ConversationService {
 
         Conversation tmpConversation = _conversationRepositoryImpl.getConversation(conversation.getId_user_creator(),conversation.getId_user_invited());
 
-        if(conversation.getId_user_invited().equals(user.getId_user())) throw new ConversationmMatchException(ErrorUtil.CONVERSATION_WITH_YOURSELF);
+        if(conversation.getId_user_invited().equals(user.getId_user())) throw new ConversationMatchException(ErrorUtil.CONVERSATION_WITH_YOURSELF);
 
         if(tmpConversation != null)  return tmpConversation;
 
@@ -40,15 +38,23 @@ public class ConversationServiceImpl implements ConversationService {
     @Override
     public void acceptRequestConversation(Long id,String user_name) {
 
-        if(isValidConversation(id,user_name)) throw new ConversationmMatchException(ErrorUtil.CONVERSATION_ACCESS_DENIED);
+        if(isValidConversation(id,user_name)) throw new ConversationMatchException(ErrorUtil.CONVERSATION_ACCESS_DENIED);
 
         _conversationRepositoryImpl.updateConversationRequest(id,true);
     }
 
     @Override
+    public void setConversationUUID(Long id,String uuid,String user_name) {
+
+        if(isValidConversation(id,user_name)) throw new ConversationMatchException(ErrorUtil.CONVERSATION_ACCESS_DENIED);
+
+        _conversationRepositoryImpl.setConversationUUID(id,uuid);
+    }
+
+    @Override
     public void blockRequestConversation(Long id,String user_name) {
 
-        if(isValidConversation(id,user_name)) throw new ConversationmMatchException(ErrorUtil.CONVERSATION_ACCESS_DENIED);
+        if(isValidConversation(id,user_name)) throw new ConversationMatchException(ErrorUtil.CONVERSATION_ACCESS_DENIED);
 
         _conversationRepositoryImpl.updateConversationRequest(id,false);
     }
@@ -56,7 +62,7 @@ public class ConversationServiceImpl implements ConversationService {
     @Override
     public void updateLastMessage(Long id,String message,String user_name) {
 
-        if(isValidConversation(id,user_name)) throw new ConversationmMatchException(ErrorUtil.CONVERSATION_ACCESS_DENIED);
+        if(isValidConversation(id,user_name)) throw new ConversationMatchException(ErrorUtil.CONVERSATION_ACCESS_DENIED);
 
         _conversationRepositoryImpl.updateLastMessage(id,message);
     }

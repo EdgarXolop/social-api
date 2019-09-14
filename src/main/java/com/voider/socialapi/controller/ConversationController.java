@@ -53,4 +53,13 @@ public class ConversationController {
 
     }
 
+    @PostMapping("/{id}/uuid")
+    public ResponseEntity<String> setConversationUUID(@PathVariable Long id, @PathParam("uuid") String uuid, Authentication authentication){
+
+        _conversationService.setConversationUUID(id, uuid, authentication.getName());
+
+        return  new ResponseEntity<>("", HttpStatus.ACCEPTED);
+
+    }
+
 }
