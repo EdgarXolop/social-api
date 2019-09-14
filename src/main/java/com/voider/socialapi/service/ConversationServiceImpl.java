@@ -9,6 +9,8 @@ import com.voider.socialapi.util.ErrorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ConversationServiceImpl implements ConversationService {
 
@@ -16,6 +18,14 @@ public class ConversationServiceImpl implements ConversationService {
     private UserRepositoryImpl _userRepository;
     @Autowired
     private ConversationRepositoryImpl _conversationRepositoryImpl;
+
+    @Override
+    public List<Conversation> findMyConversations(String user_name,int page_size, int page){
+
+        User user = _userRepository.getUserByEmail(user_name);
+
+        return _conversationRepositoryImpl.findMyConversations(user.getId_user(),page_size,page);
+    };
 
     @Override
     public Conversation createRequestConversation(Conversation conversation,String user_name) {

@@ -24,11 +24,11 @@ public class Conversation {
     @Column(updatable = false)
     private Long id_user_invited;
 
-    @Column(insertable = false)
+    @Column(insertable = false,updatable = false)
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean accepted;
 
-    @Column( insertable = false)
+    @Column(insertable = false,updatable = false)
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean standby_mode;
 
@@ -41,6 +41,15 @@ public class Conversation {
     @Column(insertable = false,updatable = false)
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updated_at;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user_creator", updatable = false, insertable = false)
+    private User creator;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user_invited", updatable = false, insertable = false)
+    private User invited;
 
     public Long getId_conversation() {
         return id_conversation;
@@ -104,5 +113,21 @@ public class Conversation {
 
     public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public User getInvited() {
+        return invited;
+    }
+
+    public void setInvited(User invited) {
+        this.invited = invited;
     }
 }

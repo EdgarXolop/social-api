@@ -10,14 +10,14 @@ import java.util.Date;
 
 public class ConversationDTO {
     private Long id_conversation;
-    private Long id_user_creator;
-    private Long id_user_invited;
     private boolean accepted;
     private boolean standby_mode;
     private String uuid;
     private String last_message;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updated_at;
+    private UserDTO creator;
+    private UserDTO invited;
 
     public Long getId_conversation() {
         return id_conversation;
@@ -25,22 +25,6 @@ public class ConversationDTO {
 
     public void setId_conversation(Long id_conversation) {
         this.id_conversation = id_conversation;
-    }
-
-    public Long getId_user_creator() {
-        return id_user_creator;
-    }
-
-    public void setId_user_creator(Long id_user_creator) {
-        this.id_user_creator = id_user_creator;
-    }
-
-    public Long getId_user_invited() {
-        return id_user_invited;
-    }
-
-    public void setId_user_invited(Long id_user_invited) {
-        this.id_user_invited = id_user_invited;
     }
 
     public boolean isAccepted() {
@@ -59,7 +43,7 @@ public class ConversationDTO {
         this.standby_mode = standby_mode;
     }
 
-    public String getUuid() {
+    public String    getUuid() {
         return uuid;
     }
 
@@ -81,5 +65,21 @@ public class ConversationDTO {
 
     public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public UserDTO getCreator() {
+        return creator;
+    }
+
+    public void setCreator(UserDTO creator) {
+        this.creator = creator;
+    }
+
+    public UserDTO getInvited() {
+        return invited;
+    }
+
+    public void setInvited(UserDTO invited) {
+        this.invited = invited;
     }
 }

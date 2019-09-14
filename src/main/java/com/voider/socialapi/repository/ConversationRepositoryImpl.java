@@ -2,6 +2,8 @@ package com.voider.socialapi.repository;
 
 import com.voider.socialapi.model.Conversation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -58,6 +60,13 @@ public class ConversationRepositoryImpl {
         if(!conversation.isPresent()) return null;
 
         return conversation.get();
+    }
+
+    public List<Conversation> findMyConversations(Long id_user, int page_size, int page){
+
+        Pageable pageable = PageRequest.of(page, page_size);
+
+        return  _conversationRepository.findMyConversations(id_user,pageable);
     }
 
 }

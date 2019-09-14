@@ -3,16 +3,21 @@ package com.voider.socialapi.controller;
 import com.voider.socialapi.dto.ConversationDTO;
 import com.voider.socialapi.model.Conversation;
 import com.voider.socialapi.service.ConversationServiceImpl;
+import com.voider.socialapi.util.Constants;
+import com.voider.socialapi.util.ObjectMapperUtils;
+import org.apache.tomcat.util.bcel.Const;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
+import java.util.List;
 
 @RestController
 @RequestMapping("/conversation")
@@ -20,6 +25,18 @@ public class ConversationController {
 
     @Autowired
     ConversationServiceImpl _conversationService;
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<List<ConversationDTO>> getConversations(@Nullable @RequestParam("page") Integer page, @Nullable @RequestParam Integer page_size, Authentication authentication){
+
+        int paramPageSize = (page_size == null) ? Constants.PAGE_SIZE : page_size.intValue();
+        int paramPage = (page == null) ? Constants.PAGE : page.intValue();
+        List<Conversation> results = _conversationService.findMyConversations(authentication.getName(),paramPageSize,paramPage );
+
+        List<ConversationDTO> page_results = ObjectMapperUtils.mapAll(results, ConversationDTO.class);
+
+        return new ResponseEntity<>(page_results,HttpStatus.OK);
+    }
 
     @PostMapping( produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<ConversationDTO> createConversation(@Valid @RequestBody Conversation conversation, Authentication authentication){
