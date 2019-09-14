@@ -24,8 +24,6 @@ public class UserServiceImpl implements UserService {
 
         _userRepository.registerUser(user);
 
-        System.out.println("service user id "+ user.getId_user());
-
         return user;
     }
 

@@ -16,8 +16,11 @@ public class ErrorUtil {
     public final static String EMPTY_CONFIRM_PASSWORD = "Please provide the password_confirm field.";
 
     //CONVERSATION VALIDATION MESSAGES
-    public final static String NOT_NULL_CREATOR = "You can´t send the id_user_creator.";
-    public final static String TRUE_ACCEPTED_STATUS = "You can´t set the accepted field.";
+    public final static String NOT_NULL_CREATOR = "You can't send the id_user_creator.";
+    public final static String TRUE_ACCEPTED_STATUS = "You can't set the accepted field.";
     public final static String INVALID_USER_INVITED = "Please provide a valid id_user.";
+    public final static String CONVERSATION_ALREADY_EXISTS = "Conversation already exists.";
+    public final static String CONVERSATION_ACCESS_DENIED = "You dont have access to this conversation.";
+    public final static String CONVERSATION_WITH_YOURSELF = "You can't open a conversation with yourself.";
 
 }

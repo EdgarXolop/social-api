@@ -17,7 +17,6 @@ public class Conversation {
     @Column(insertable = false, updatable = false)
     private Long id_conversation;
 
-    @Null(message = ErrorUtil.NOT_NULL_CREATOR)
     @Column(updatable = false)
     private Long id_user_creator;
 
@@ -25,13 +24,11 @@ public class Conversation {
     @Column(updatable = false)
     private Long id_user_invited;
 
-    @Null(message = ErrorUtil.TRUE_ACCEPTED_STATUS)
-    @Column(nullable = false, insertable = false)
+    @Column(insertable = false)
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean accepted;
 
-    @Null(message = ErrorUtil.TRUE_ACCEPTED_STATUS)
-    @Column(nullable = false, insertable = false)
+    @Column( insertable = false)
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean standby_mode;
 

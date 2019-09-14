@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface ConversationRepository
         extends JpaRepository<Conversation, Long> {
@@ -19,5 +21,13 @@ public interface ConversationRepository
     @Modifying
     @Query("UPDATE Conversation c SET c.last_message = :last_message WHERE c.id_conversation = :id_conversation")
     int setLastMessage(@Param("id_conversation") Long id_conversation, @Param("last_message") String last_message);
+
+
+    @Query("FROM Conversation WHERE (id_user_creator = :id_user_creator AND id_user_invited = :id_user_invited ) OR (id_user_creator = :id_user_invited AND id_user_invited = :id_user_creator )")
+    Optional<Conversation> getConversation(Long id_user_creator, Long id_user_invited);
+
+
+    @Query("FROM Conversation WHERE (id_user_creator = :id_user OR id_user_invited = :id_user ) AND id_conversation = :id_conversation")
+    Optional<Conversation> getValidConversation(Long id_conversation, Long id_user);
 
 }

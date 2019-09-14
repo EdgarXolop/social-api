@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ConverstaionDTO {
+public class ConversationDTO {
     private Long id_conversation;
     private Long id_user_creator;
     private Long id_user_invited;

@@ -8,13 +8,22 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class UserDTO {
+    Long id_user;
     String user_name;
     String email;
     String first_name;
     String last_name;
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     Date date_of_birth;
     String phone_number;
+
+    public Long getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(Long id_user) {
+        this.id_user = id_user;
+    }
 
     public String getUser_name() {
         return user_name;

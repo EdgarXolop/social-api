@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class UserRepositoryImpl {
 
@@ -16,19 +18,19 @@ public class UserRepositoryImpl {
     UserRepository _userRepository;
 
     public User getUserByEmail(String email){
-        User user = _userRepository.findByEmail(email);
+        Optional<User> user = _userRepository.findByEmail(email);
 
-        if(user == null) throw new ResourceNotFoundException("Couldn't find a User with the email: " + email);
+        user.orElseThrow(() -> new ResourceNotFoundException("Couldn't find a User with the email: " + email));
 
-        return user;
+        return user.get();
     }
 
     public User getUserByUserName(String userName){
-        User user = _userRepository.findByUserName(userName);
+        Optional<User> user = _userRepository.findByUserName(userName);
 
-        if(user == null) throw new ResourceNotFoundException("Couldn't find a User with the username: " + userName);
+        user.orElseThrow(() -> new ResourceNotFoundException("Couldn't find a User with the username: " + userName));
 
-        return user;
+        return user.get();
     }
 
     public User registerUser(User user){

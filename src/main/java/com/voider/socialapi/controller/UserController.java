@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -31,7 +34,7 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<UserDTO> getInfo(Authentication authentication) {
 
-        User user = _userRepository.getUserByUserName(authentication.getName());
+        User user = _userRepository.getUserByEmail(authentication.getName());
 
         ModelMapper modelMapper = new ModelMapper();
         UserDTO userDTO = modelMapper.map(user, UserDTO.class);
@@ -40,5 +43,17 @@ public class UserController {
 
     }
 
+    @GetMapping(value = "/list")
+    @ResponseBody
+    public ResponseEntity<List<UserDTO>> listUsers() {
+
+        List<UserDTO> users = new ArrayList<>();
+
+//        ModelMapper modelMapper = new ModelMapper();
+//        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+
+        return new ResponseEntity<>(users, HttpStatus.ACCEPTED);
+
+    }
 
 }
