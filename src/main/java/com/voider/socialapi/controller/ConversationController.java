@@ -21,7 +21,7 @@ public class ConversationController {
     @Autowired
     ConversationServiceImpl _conversationService;
 
-    @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping( produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<ConversationDTO> createConversation(@Valid @RequestBody Conversation conversation, Authentication authentication){
 
         conversation = _conversationService.createRequestConversation(conversation, authentication.getName());
