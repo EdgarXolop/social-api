@@ -64,7 +64,7 @@ public class ConversationRepositoryImpl {
 
     public List<Conversation> findMyConversations(Long id_user, int page_size, int page){
 
-        Pageable pageable = PageRequest.of(page, page_size);
+        Pageable pageable = PageRequest.of(page-1, page_size);
 
         return  _conversationRepository.findMyConversations(id_user,pageable);
     }

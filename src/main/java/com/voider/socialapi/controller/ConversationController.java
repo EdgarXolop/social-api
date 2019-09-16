@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -27,15 +28,19 @@ public class ConversationController {
     ConversationServiceImpl _conversationService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<ConversationDTO>> getConversations(@Nullable @RequestParam("page") Integer page, @Nullable @RequestParam Integer page_size, Authentication authentication){
+    public ResponseEntity<HashMap<String,Object>> getConversations(@Nullable @RequestParam("page") Integer page, @Nullable @RequestParam Integer page_size, Authentication authentication){
+
+        HashMap<String,Object> response = new HashMap<>();
 
         int paramPageSize = (page_size == null) ? Constants.PAGE_SIZE : page_size.intValue();
         int paramPage = (page == null) ? Constants.PAGE : page.intValue();
         List<Conversation> results = _conversationService.findMyConversations(authentication.getName(),paramPageSize,paramPage );
-
         List<ConversationDTO> page_results = ObjectMapperUtils.mapAll(results, ConversationDTO.class);
 
-        return new ResponseEntity<>(page_results,HttpStatus.OK);
+        response.put("page",paramPage);
+        response.put("data",results);
+
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
     @PostMapping( produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)

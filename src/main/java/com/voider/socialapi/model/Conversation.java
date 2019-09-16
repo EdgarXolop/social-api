@@ -43,11 +43,11 @@ public class Conversation {
     private Date updated_at;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user_creator", updatable = false, insertable = false)
     private User creator;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user_invited", updatable = false, insertable = false)
     private User invited;
 
