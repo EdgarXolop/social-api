@@ -48,7 +48,7 @@ public class ConversationServiceImpl implements ConversationService {
     @Override
     public void acceptRequestConversation(Long id,String user_name) {
 
-        if(isValidConversation(id,user_name)) throw new ConversationMatchException(ErrorUtil.CONVERSATION_ACCESS_DENIED);
+        if(!isValidConversation(id,user_name)) throw new ConversationMatchException(ErrorUtil.CONVERSATION_ACCESS_DENIED);
 
         _conversationRepositoryImpl.updateConversationRequest(id,true);
     }
@@ -56,7 +56,7 @@ public class ConversationServiceImpl implements ConversationService {
     @Override
     public void setConversationUUID(Long id,String uuid,String user_name) {
 
-        if(isValidConversation(id,user_name)) throw new ConversationMatchException(ErrorUtil.CONVERSATION_ACCESS_DENIED);
+        if(!isValidConversation(id,user_name)) throw new ConversationMatchException(ErrorUtil.CONVERSATION_ACCESS_DENIED);
 
         _conversationRepositoryImpl.setConversationUUID(id,uuid);
     }
@@ -64,7 +64,7 @@ public class ConversationServiceImpl implements ConversationService {
     @Override
     public void blockRequestConversation(Long id,String user_name) {
 
-        if(isValidConversation(id,user_name)) throw new ConversationMatchException(ErrorUtil.CONVERSATION_ACCESS_DENIED);
+        if(!isValidConversation(id,user_name)) throw new ConversationMatchException(ErrorUtil.CONVERSATION_ACCESS_DENIED);
 
         _conversationRepositoryImpl.updateConversationRequest(id,false);
     }
@@ -72,7 +72,7 @@ public class ConversationServiceImpl implements ConversationService {
     @Override
     public void updateLastMessage(Long id,String message,String user_name) {
 
-        if(isValidConversation(id,user_name)) throw new ConversationMatchException(ErrorUtil.CONVERSATION_ACCESS_DENIED);
+        if(!isValidConversation(id,user_name)) throw new ConversationMatchException(ErrorUtil.CONVERSATION_ACCESS_DENIED);
 
         _conversationRepositoryImpl.updateLastMessage(id,message);
     }
@@ -80,6 +80,6 @@ public class ConversationServiceImpl implements ConversationService {
     private Boolean isValidConversation(Long id,String user_name){
         User user = _userRepository.getUserByEmail(user_name);
 
-        return _conversationRepositoryImpl.getValidConversation(id,user.getId_user()) == null;
+        return _conversationRepositoryImpl.getValidConversation(id,user.getId_user()) != null;
     }
 }
