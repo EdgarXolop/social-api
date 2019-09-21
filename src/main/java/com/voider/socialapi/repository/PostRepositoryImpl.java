@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,16 @@ public class PostRepositoryImpl {
 
     }
 
-    public Post udpate(Post post){
+    public Post getPost(Long id){
+
+        Optional<Post> valid = _postRepository.findById(id);
+
+        valid.orElseThrow(() -> new InvalidPostId("Invalid  post_id, Post not found."));
+
+        return valid.get();
+    }
+
+    public Post update(Post post){
 
         if(post.getId_post() == null) throw new InvalidPostId("The post id can't be null.");
 

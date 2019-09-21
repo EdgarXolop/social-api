@@ -37,7 +37,7 @@ public class PostServiceImpl implements PostService {
 
         if(!isValidPost(post.getId_post(),user_name)) throw new InvalidPostPermission("Insufficient permissions to change this post.");
 
-        _posPostRepository.udpate(post);
+        _posPostRepository.update(post);
 
         return post;
     }
@@ -49,7 +49,14 @@ public class PostServiceImpl implements PostService {
 
         post.setDeleted_at(new Date());
 
-        _posPostRepository.udpate(post);
+        _posPostRepository.update(post);
+
+        return post;
+    }
+
+    @Override
+    public Post getPostById(Long id) {
+        Post post = _posPostRepository.getPost(id);
 
         return post;
     }

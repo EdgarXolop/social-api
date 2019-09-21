@@ -38,7 +38,7 @@ public class ConversationController {
         List<ConversationDTO> page_results = ObjectMapperUtils.mapAll(results, ConversationDTO.class);
 
         response.put("page",paramPage);
-        response.put("data",results);
+        response.put("data",page_results);
 
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
