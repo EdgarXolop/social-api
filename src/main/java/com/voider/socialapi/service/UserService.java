@@ -6,5 +6,7 @@ import com.voider.socialapi.model.UserCredentials;
 public interface UserService {
 
     public User registerUser(User user);
-    public User authUser(UserCredentials userCredentials);
+    public String authUser(UserCredentials userCredentials);
+    public String refreshUser(String refreshToken);
+    public String checkUser(String token);
 }

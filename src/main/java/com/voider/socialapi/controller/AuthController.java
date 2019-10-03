@@ -7,11 +7,9 @@ import com.voider.socialapi.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -21,10 +19,22 @@ public class AuthController {
     @Autowired
     UserService _userService;
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     ResponseEntity<String> login(@Valid @RequestBody UserCredentials credentials){
 
-        return new ResponseEntity<>("Login path", HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(_userService.authUser(credentials), HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping(value = "/refresh",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    ResponseEntity<String> refreshUser(@RequestParam("refresh_token") String refreshToken){
+
+        return new ResponseEntity<>(_userService.refreshUser(refreshToken), HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping(value = "/check",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    ResponseEntity<String> checkUser(@RequestParam("token") String token){
+
+        return new ResponseEntity<>(_userService.checkUser(token), HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/register")

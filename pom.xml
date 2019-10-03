@@ -63,6 +63,13 @@
             <artifactId>modelmapper</artifactId>
             <version>2.3.5</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.konghq</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>3.1.00</version>
+        </dependency>
+
     </dependencies>
 
     <build>
