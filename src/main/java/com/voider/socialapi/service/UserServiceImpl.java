@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String authUser(UserCredentials userCredentials) {
+    public HttpResponse<String> authUser(UserCredentials userCredentials) {
 
         HttpResponse<String> response = Unirest.post(env.getProperty("oauth2.accessTokenUri"))
                 .header("Authorization", "Basic YWNtZTphY21lc2VjcmV0")
@@ -47,11 +47,11 @@ public class UserServiceImpl implements UserService {
                 .queryString("password", userCredentials.getPassword())
                 .asString();
 
-        return response.getBody();
+        return response;
     }
 
     @Override
-    public String refreshUser(String refreshToken) {
+    public HttpResponse<String> refreshUser(String refreshToken) {
 
         HttpResponse<String> response = Unirest.post(env.getProperty("oauth2.accessTokenUri"))
                 .header("Authorization", "Basic YWNtZTphY21lc2VjcmV0")
@@ -62,11 +62,11 @@ public class UserServiceImpl implements UserService {
                 .queryString("username", refreshToken)
                 .asString();
 
-        return response.getBody();
+        return response;
     }
 
     @Override
-    public String checkUser(String token) {
+    public HttpResponse<String> checkUser(String token) {
 
         HttpResponse<String> response = Unirest.post(env.getProperty("oauth2.checkTokenUri"))
                 .header("Authorization", "Basic YWNtZTphY21lc2VjcmV0")
@@ -76,6 +76,6 @@ public class UserServiceImpl implements UserService {
                 .queryString("username", token)
                 .asString();
 
-        return response.getBody();
+        return response;
     }
 }
