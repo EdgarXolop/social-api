@@ -69,6 +69,12 @@ public class PostServiceImpl implements PostService {
         return _posPostRepository.getMyPosts(user.getId_user(),page_size,page);
     }
 
+    @Override
+    public List<Post> getPosts(int page_size, int page){
+
+        return _posPostRepository.getPosts(page_size,page);
+    };
+
     private Boolean isValidPost(Long id,String user_name){
         User user = _userRepository.getUserByEmail(user_name);
 

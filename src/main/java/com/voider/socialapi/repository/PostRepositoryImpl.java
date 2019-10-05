@@ -61,4 +61,12 @@ public class PostRepositoryImpl {
         return null;
     }
 
+
+    public List<Post> getPosts( int page_size, int page){
+
+        Pageable pageable = PageRequest.of(page-1, page_size);
+
+        return  _postRepository.getPosts(pageable);
+    }
+
 }

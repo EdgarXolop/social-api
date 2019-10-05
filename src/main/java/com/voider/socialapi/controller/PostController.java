@@ -25,6 +25,22 @@ public class PostController {
     @Autowired
     PostServiceImpl _posPostService;
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<HashMap<String,Object>> getPosts(@Nullable @RequestParam("page") Integer page, @Nullable @RequestParam Integer page_size){
+
+        HashMap<String,Object> response = new HashMap<>();
+
+        int paramPageSize = (page_size == null) ? Constants.PAGE_SIZE : page_size.intValue();
+        int paramPage = (page == null) ? Constants.PAGE : page.intValue();
+        List<Post> results = _posPostService.getPosts(paramPageSize,paramPage );
+        List<PostDTO> page_results = ObjectMapperUtils.mapAll(results, PostDTO.class);
+
+        response.put("page",paramPage);
+        response.put("data",page_results);
+
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<PostDTO> getPost(@PathVariable Long id, Authentication authentication){
 
@@ -38,7 +54,7 @@ public class PostController {
 
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value =  "/own",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<HashMap<String,Object>> getMyPosts(@Nullable @RequestParam("page") Integer page, @Nullable @RequestParam Integer page_size, Authentication authentication){
 
         HashMap<String,Object> response = new HashMap<>();

@@ -17,4 +17,7 @@ public interface PostRepository extends JpaRepository<Post,Long> {
 
     @Query("FROM Post WHERE id_user_creator = :id_user AND id_post = :id_post")
     Optional<Post> getMyPost(Long id_post,Long id_user);
+
+    @Query("FROM Post ORDER BY updated_at")
+    List<Post> getPosts( Pageable pageable);
 }
