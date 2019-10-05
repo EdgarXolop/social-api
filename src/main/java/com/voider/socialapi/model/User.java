@@ -20,12 +20,12 @@ public class User {
     private Long id_user;
 
     @NotBlank(message = ErrorUtil.EMPTY_USERNAME)
-    @Column
+    @Column(updatable = false)
     private String user_name;
 
     @Email(message = ErrorUtil.WRONG_EMAIL)
     @NotBlank(message = ErrorUtil.EMPTY_EMAIL)
-    @Column(unique = true)
+    @Column(unique = true, updatable = false)
     private String email;
 
     @Column

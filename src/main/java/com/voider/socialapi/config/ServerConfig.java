@@ -12,26 +12,26 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class ServerConfig  implements WebMvcConfigurer {
 
-//    @Bean
-//    public FilterRegistrationBean platformCorsFilter() {
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//
-//        CorsConfiguration configAutenticacao = new CorsConfiguration();
-//        configAutenticacao.setAllowCredentials(true);
-//        configAutenticacao.addAllowedOrigin("*");
-//        configAutenticacao.addAllowedHeader("Authorization");
-//        configAutenticacao.addAllowedHeader("Content-Type");
-//        configAutenticacao.addAllowedHeader("Accept");
-//        configAutenticacao.addAllowedMethod("POST");
-//        configAutenticacao.addAllowedMethod("GET");
-//        configAutenticacao.addAllowedMethod("DELETE");
-//        configAutenticacao.addAllowedMethod("PUT");
-//        configAutenticacao.addAllowedMethod("OPTIONS");
-//        configAutenticacao.setMaxAge(3600L);
-//        source.registerCorsConfiguration("/**", configAutenticacao);
-//
-//        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
-//        bean.setOrder(-110);
-//        return bean;
-//    }
+    @Bean
+    public FilterRegistrationBean platformCorsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+        CorsConfiguration configAutenticacao = new CorsConfiguration();
+        configAutenticacao.setAllowCredentials(true);
+        configAutenticacao.addAllowedOrigin("*");
+        configAutenticacao.addAllowedHeader("Authorization");
+        configAutenticacao.addAllowedHeader("Content-Type");
+        configAutenticacao.addAllowedHeader("Accept");
+        configAutenticacao.addAllowedMethod("POST");
+        configAutenticacao.addAllowedMethod("GET");
+        configAutenticacao.addAllowedMethod("DELETE");
+        configAutenticacao.addAllowedMethod("PUT");
+        configAutenticacao.addAllowedMethod("OPTIONS");
+        configAutenticacao.setMaxAge(3600L);
+        source.registerCorsConfiguration("/**", configAutenticacao);
+
+        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+        bean.setOrder(-110);
+        return bean;
+    }
 }

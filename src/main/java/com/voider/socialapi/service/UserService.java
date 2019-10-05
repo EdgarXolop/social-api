@@ -7,6 +7,7 @@ import kong.unirest.HttpResponse;
 public interface UserService {
 
     public User registerUser(User user);
+    public User updateUser(String user_name, User user);
     public HttpResponse<String> authUser(UserCredentials userCredentials);
     public HttpResponse<String> refreshUser(String refreshToken);
     public HttpResponse<String> checkUser(String token);

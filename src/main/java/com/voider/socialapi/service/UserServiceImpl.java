@@ -1,5 +1,6 @@
 package com.voider.socialapi.service;
 
+import com.voider.socialapi.dto.UserDTO;
 import com.voider.socialapi.http.exception.PasswordMismatchException;
 import com.voider.socialapi.model.User;
 import com.voider.socialapi.model.UserCredentials;
@@ -32,6 +33,22 @@ public class UserServiceImpl implements UserService {
         _userRepository.registerUser(user);
 
         return user;
+    }
+
+    @Override
+    public User updateUser(String user_name, User user) {
+        //TODO: remove updatable false from user model
+        User original_user = _userRepository.getUserByEmail(user_name);
+
+        original_user.setFirst_name(user.getFirst_name());
+        original_user.setLast_name(user.getLast_name());
+        original_user.setDate_of_birth(user.getDate_of_birth());
+        original_user.setPhone_number(user.getPhone_number());
+
+
+        _userRepository.updateUser(original_user);
+
+        return original_user;
     }
 
     @Override
