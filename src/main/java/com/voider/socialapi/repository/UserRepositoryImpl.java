@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Component
@@ -39,7 +40,14 @@ public class UserRepositoryImpl {
 
         _userRepository.save(user);
 
-        System.out.println("user id "+ user.getId_user());
+        return user;
+    }
+
+    @Transactional
+    public User updateUser(User user){
+
+        _userRepository.updateUser(user.getId_user(),user.getFirst_name(),user.getLast_name());
+
         return user;
     }
 }
