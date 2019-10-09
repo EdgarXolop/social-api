@@ -8,4 +8,4 @@ RUN cp /usr/src/java-code/target/*.jar ./app.jar
 EXPOSE 8081
 
 
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "-Dspring.profiles.active=prod", "app.jar"]
