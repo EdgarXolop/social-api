@@ -1,4 +1,4 @@
-FROM maven:3-jdk8
+FROM maven:3.6.0-jdk-8
 WORKDIR /usr/src/java-code
 COPY . /usr/src/java-code/
 RUN mvn package
