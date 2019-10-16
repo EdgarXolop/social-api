@@ -5,7 +5,7 @@ RUN mvn package
  
 WORKDIR /usr/src/java-app
 RUN cp /usr/src/java-code/target/*.jar ./app.jar
-EXPOSE 8081
+EXPOSE 8082
 
 
 CMD ["java", "-jar", "-Dspring.profiles.active=prod", "app.jar"]
